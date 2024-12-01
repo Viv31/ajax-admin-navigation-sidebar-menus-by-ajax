@@ -4,11 +4,14 @@ Plugin Name: AJAX Admin Navigation Sidebar AJAX
 Description: Adds AJAX navigation to the WordPress admin dashboard to prevent full page reloads.
 Version: 1.0
 Author: Vaibhav Gangrade
-Author URL:
-Author URI:
+Author URI: 
 Stable Version: 1.0
-Tested Upto: 6.6
+Tested Up To: 6.6
+License: GPL v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Short Description: Plugin for controlling admin menus sideabr with ajax for prevnting extra server load.
 */
+
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
@@ -77,75 +80,3 @@ if (!class_exists('AJAX_Admin_Navigation_Menus')) {
 new AJAX_Admin_Navigation_Menus();
 
 
-// Enqueue scripts
-        function ajax_admin_login_enqueue_scripts() {
-            if (!is_user_logged_in()) {
-                
-                // wp_localize_script('ajax-admin-login', 'ajax_login_object', array(
-                //     'loginajaxajaxurl' => admin_url('admin-ajax.php'),
-                //     'redirecturl' => admin_url(),
-                //     'loadingmessage' => __('Sending user info, please wait...')
-                // ));
-            }
-        }
-        //add_action('wp_enqueue_scripts', 'ajax_admin_login_enqueue_scripts');
-        // AJAX login handler
-        function ajax_admin_login() {
-            // First check the nonce, if it fails the function will break
-            check_ajax_referer('ajax-login-nonce', 'security');
-
-            // Nonce is checked, get the POST data and sign user on
-            $info = array();
-            $info['user_login'] = $_POST['username'];
-            $info['user_password'] = $_POST['password'];
-            $info['remember'] = true;
-
-            $user_signon = wp_signon($info, false);
-
-            if (is_wp_error($user_signon)) {
-                echo json_encode(array('loggedin' => false, 'message' => __('Wrong username or password.')));
-            } else {
-                echo json_encode(array('loggedin' => true, 'message' => __('Login successful, redirecting...')));
-            }
-
-            die();
-        }
-        add_action('wp_ajax_nopriv_ajaxadminlogin', 'ajax_admin_login');
-
-
-// AJAX handler to fetch posts by status
-//  function fetch_posts_by_status() {
-//     check_ajax_referer('custom-admin-ajax-nonce', 'nonce'); // Verify nonce
-
-//     // Get the post status from AJAX request
-//     $post_status = isset($_POST['post_status']) ? sanitize_text_field($_POST['post_status']) : 'publish';
-
-//     echo "sts  ".$post_status;
-//     // Query posts by status
-//     $args = array(
-//         'post_status' => ($post_status === 'all') ? array('publish', 'draft', 'pending', 'trash') : $post_status,
-//         'posts_per_page' => -1, // Retrieve all posts
-//         'post_type' => 'post' // Change this to custom post type if needed
-//     );
-
-//     $posts_query = new WP_Query($args);
-
-//     // Prepare response
-//     $posts = array();
-//     if ($posts_query->have_posts()) {
-//         while ($posts_query->have_posts()) {
-//             $posts_query->the_post();
-//             $posts[] = array(
-//                 'ID' => get_the_ID(),
-//                 'title' => get_the_title(),
-//                 'link' => get_edit_post_link(),
-//                 'status' => get_post_status()
-//             );
-//         }
-//         wp_reset_postdata();
-//     }
-
-//     // Send JSON response
-//     wp_send_json_success($posts);
-//     wp_die(); // Always die in functions that handle AJAX
-// }

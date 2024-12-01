@@ -1,16 +1,20 @@
-== AJAX ADMIN NAVIGATION  ==
+== AJAX Admin Navigation Sidebar AJAX  ==
 Contributors: vaibhav31gangrade
 Tags: AJAX Navigation,Navigation with ajax,AJAX Menu,AJAX Menu PLugin, 
 Requires at least: 4.6
-Tested up to: 6.6
-Stable tag: 1.1
+Tested up to: 6.7
+Stable tag: 1.0
 Requires PHP: 5.2.4
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: 
+Short Description: Plugin for controlling admin menus sideabr with ajax for prevnting extra server load.
 
 == Description ==
 Adds AJAX navigation to the WordPress admin dashboard to prevent full page reloads.
+
+== Short Description == 
+Plugin for controlling admin menus sideabr with ajax for prevnting extra server load.
 
 == How to Use ==
 After installation, the plugin will automatically convert main navigation to the AJAX naigation.
@@ -55,8 +59,6 @@ Make the following sections with ajax:
 3)Logout
 4)Help 
 5)Screen options
-
-
 
 #Features:
 1)Admin login with ajax
