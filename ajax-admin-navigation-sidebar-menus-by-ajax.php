@@ -30,10 +30,11 @@ if (!class_exists('AJAX_Admin_Navigation_Menus')) {
         public function enqueue_scripts() {
             wp_enqueue_script('custom-admin-ajax', plugin_dir_url(__FILE__) . 'js/custom-admin-ajax.js', array('jquery'), null, true);
 
-            wp_localize_script('custom-admin-ajax', 'ajax_object', array(
+           wp_localize_script('custom-admin-ajax', 'ajax_admin_nav_object', array(
                 'ajax_url' => admin_url('admin-ajax.php'),
                 'nonce'    => wp_create_nonce('custom-admin-ajax-nonce'),
             ));
+
 
             // Enqueue the custom CSS file
             wp_enqueue_style('custom-admin-style', plugin_dir_url(__FILE__) . 'css/style.css');
